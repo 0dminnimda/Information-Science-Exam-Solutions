@@ -1,0 +1,2 @@
+# Information Science Exam Solutions
+ 
