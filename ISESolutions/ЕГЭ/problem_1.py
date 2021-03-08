@@ -1,4 +1,11 @@
 #!/usr/bin/python3.9
+# -*- coding: utf-8 -*-
+
+from __future__ import annotations
+
+__all__ = (
+    "Node",)
+
 
 # the problem gives us a drawing of a graph
 # and a table describing the lengths of the edges of the graph
@@ -19,3 +26,7 @@ class Node:
         self.children.append(other)
         return self
 
+
+class Edge:
+    def __init__(self, start_node: Node, end_node: Node) -> None:
+        pass
