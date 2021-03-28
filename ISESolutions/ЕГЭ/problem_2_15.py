@@ -48,6 +48,14 @@ class AnyBoolType:
         # python source https://git.io/JYYqa
         return int.__or__(self, other)
 
+    # __rxor__ is left for python
+    def __xor__(self, other):
+        if type(other) is bool:
+            return self
+
+        # python source https://git.io/JYYqj
+        return int.__xor__(self, other)
+
 
 AnyBool = AnyBoolType()
 
