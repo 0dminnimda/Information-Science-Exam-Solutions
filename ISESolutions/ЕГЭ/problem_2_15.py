@@ -38,6 +38,16 @@ class AnyBoolType:
         # python source https://git.io/JYYqZ
         return int.__and__(self, other)
 
+    # __ror__ is left for python
+    def __or__(self, other):
+        if other is False:
+            return self
+        if other is True:
+            return True
+
+        # python source https://git.io/JYYqa
+        return int.__or__(self, other)
+
 
 AnyBool = AnyBoolType()
 
