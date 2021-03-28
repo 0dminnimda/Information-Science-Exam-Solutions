@@ -28,6 +28,16 @@ class AnyBoolType:
     def __repr__(self):
         return "AnyBool"
 
+    # __rand__ is left for python
+    def __and__(self, other):
+        if other is False:
+            return False
+        if other is True:
+            return self
+
+        # python source https://git.io/JYYqZ
+        return int.__and__(self, other)
+
 
 AnyBool = AnyBoolType()
 
