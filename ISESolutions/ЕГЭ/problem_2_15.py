@@ -87,21 +87,21 @@ def find(values, function, number_of_values):
     # TODO: does not work
     successes = []
 
-    for i in boolean_enumerator(number_of_values):
-        result = f(*i)
+    for inputs in boolean_enumerator(number_of_values):
+        result = function(*inputs)
 
         for v, r in values:
             if result == r:
                 pass
                 #print(validate(v, i), v, i)
 
-            if r == result and validate(v, i):
-                successes.append((*i, result))
+            if r == result and validate(v, inputs):
+                successes.append((*inputs, result))
                 # values.remove([*v, r])
                 # break
 
         if result:
-           print([int(j) for j in i])     
+            print([int(j) for j in inputs])
 
     print("\n".join([str(i) for i in successes]))
 
