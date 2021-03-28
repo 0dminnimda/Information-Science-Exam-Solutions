@@ -79,14 +79,14 @@ def find(values, function, number_of_values):
     for inputs in product(FT, repeat=number_of_values):
         result = function(*inputs)
 
-        for v, r in values:
-            if result == r:
+        for given_inputs, output in values:
+            if result == output:
                 pass
-                #print(validate(v, i), v, i)
+                # print(validate(given_inputs, i), given_inputs, i)
 
-            if r == result and validate(v, inputs):
+            if result == output and validate(given_inputs, inputs):
                 successes.append((*inputs, result))
-                # values.remove([*v, r])
+                # values.remove([*given_inputs, output])
                 # break
 
         if result:
