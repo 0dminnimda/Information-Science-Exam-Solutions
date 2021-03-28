@@ -23,6 +23,8 @@ def boolean_enumerator(number):
 
 
 class AnyBoolType:
+    __slots__ = ()
+
     def __repr__(self):
         return "AnyBool"
 
