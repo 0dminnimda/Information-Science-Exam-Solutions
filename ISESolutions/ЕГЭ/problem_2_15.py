@@ -56,6 +56,18 @@ class AnyBoolType:
         # python source https://git.io/JYYqj
         return int.__xor__(self, other)
 
+    # __ne__ is left for python
+    def __eq__(self, other):
+        if type(other) is bool:
+            return True
+
+        # since AnyBoolType doesn't support integers,
+        # 0 and 1 (False and True representations)
+        # will be ignored
+
+        # AnyBoolType only represents True and False
+        return False
+
 
 AnyBool = AnyBoolType()
 
