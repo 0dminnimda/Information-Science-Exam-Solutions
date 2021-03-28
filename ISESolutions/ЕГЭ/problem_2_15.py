@@ -1,25 +1,14 @@
 #!/usr/bin/python3.9
 # -*- coding: utf-8 -*-
 
+from itertools import product
+
+
 def implication(a, b):
     return not (a and not b)
 
 
-FT = ((False,), (True,))
-
-
-def boolean_enumerator(number):
-    if number <= 0:
-        raise ValueError("number must graeter than 0")
-    elif number == 1:
-        return FT
-    else:
-        smaller_enumerator = boolean_enumerator(number - 1)
-        result = []
-        for i in FT:
-            for j in smaller_enumerator:
-                result.append(i + j)
-        return tuple(result)
+FT = (False, True)
 
 
 class AnyBoolType:
@@ -87,7 +76,7 @@ def find(values, function, number_of_values):
     # TODO: does not work
     successes = []
 
-    for inputs in boolean_enumerator(number_of_values):
+    for inputs in product(FT, repeat=number_of_values):
         result = function(*inputs)
 
         for v, r in values:
