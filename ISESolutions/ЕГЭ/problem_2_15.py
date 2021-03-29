@@ -68,15 +68,7 @@ class AnyBoolType:
 AnyBool = AnyBoolType()
 
 
-def validate(values1, values2):
-    if len(values2) != len(values1):
-        raise ValueError("different lengths")
 
-    for v1, v2 in zip(values1, values2):
-        if not (v1 is AnyBool or v2 is AnyBool):
-            if v1 is not v2:
-                return False
-    return True
 
 def cast_values(values, function=to_bool):
     values = list(values)
@@ -112,15 +104,19 @@ def find(values, function):
         for given_inputs, output in values:
             if result == output:
                 pass
-                # print(validate(given_inputs, i), given_inputs, i)
+                # print(given_inputs == i, given_inputs, i)
 
-            if result == output and validate(given_inputs, inputs):
-                successes.append((*inputs, result))
+            if result == output and given_inputs == inputs:
+                print(given_inputs)
+                successes.append((
+                    [int(j) for j in inputs],
+                    int(result)))
                 # values.remove([*given_inputs, output])
                 # break
 
-        if result:
+        if result == output:
             print([int(j) for j in inputs])
+            pass
 
     print("\n".join([str(i) for i in successes]))
 
