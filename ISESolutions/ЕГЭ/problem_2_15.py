@@ -103,13 +103,27 @@ def measure_values(values):
     return inputs_len
 
 
-def find(values, function):
+def iscondidate(inps, given_inps):
+    if (inps.count(0) < given_inps.count(0)
+            or inps.count(1) < given_inps.count(1)):
+        return False
+
+    return True
+
+
+def find(values, function, names):
 
     # TODO: does not work
     successes = []
 
     inputs_len = measure_values(values)
-    values = cast_values(values)
+    # values = cast_values(values)
+
+    if len(names) != inputs_len:
+        raise DIFF_LEN
+    names = tuple(names)
+
+    print(names)
 
     for inputs in product(FT, repeat=inputs_len):
         result = function(*inputs)
