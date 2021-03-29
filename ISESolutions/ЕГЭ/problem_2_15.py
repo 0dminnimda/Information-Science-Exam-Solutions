@@ -8,20 +8,7 @@ def implication(a, b):
     return b ** a  # not (a and not b)
 
 
-FT = (False, True)
 FT = (0, 1)
-
-
-class AnyBoolCounterType:
-    def __eq__(self, other):
-        if other is AnyBool:
-            return True
-        # if other is self:
-        #     return True
-        return False
-
-
-AnyBoolCounter = AnyBoolCounterType()
 
 
 class AnyBoolType:
