@@ -23,6 +23,8 @@ class AnyBoolType:
             return False
         if other is True:
             return self
+        if other is self:
+            return self
 
         # python source https://git.io/JYYqZ
         return int.__and__(self, other)
@@ -33,6 +35,8 @@ class AnyBoolType:
             return self
         if other is True:
             return True
+        if other is self:
+            return self
 
         # python source https://git.io/JYYqa
         return int.__or__(self, other)
@@ -40,6 +44,8 @@ class AnyBoolType:
     # __rxor__ is left for python
     def __xor__(self, other):
         if type(other) is bool:
+            return self
+        if other is self:
             return self
 
         # python source https://git.io/JYYqj
@@ -49,7 +55,8 @@ class AnyBoolType:
     def __eq__(self, other):
         if type(other) is bool:
             return True
-
+        if other is self:
+            return True
         # since AnyBoolType doesn't support integers,
         # 0 and 1 (False and True representations)
         # will be ignored
