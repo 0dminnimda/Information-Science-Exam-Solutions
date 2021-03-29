@@ -114,7 +114,7 @@ def iscondidate(inps, given_inps):
 def find(values, function, names):
 
     # TODO: does not work
-    successes = []
+    condidates = set()
 
     inputs_len = measure_values(values)
     # values = cast_values(values)
@@ -130,22 +130,23 @@ def find(values, function, names):
 
         for given_inputs, output in values:
             if result == output:
-                pass
+                if iscondidate(inputs, given_inputs):
+                    condidates.add((inputs, result))
                 # print(given_inputs == i, given_inputs, i)
 
-            if result == output and given_inputs == inputs:
-                print(given_inputs)
-                successes.append((
-                    [int(j) for j in inputs],
-                    int(result)))
-                # values.remove([*given_inputs, output])
-                # break
+        #     if result == output and given_inputs == inputs:
+        #         print(given_inputs)
+        #         successes.append((
+        #             [int(j) for j in inputs],
+        #             int(result)))
+        #         # values.remove([*given_inputs, output])
+        #         # break
 
-        if result == output:
-            print([int(j) for j in inputs])
-            pass
+        # if result == output:
+        #     print([int(j) for j in inputs])
+        #     pass
 
-    print("\n".join([str(i) for i in successes]))
+    print("\n".join([str(i) for i in condidates]))
 
 
 def f(x, y, z, w):
