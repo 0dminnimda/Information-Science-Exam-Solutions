@@ -189,6 +189,213 @@ vals = [
 
 find(vals, f_3, names)
 
+breakpoint()
+
+
+"""
+Algorithm
+
+values
+    v  - - - -
+    0  0 1 1 0
+    1  0 1 1 1
+    2  1 0 0 0
+    3  1 0 1 0
+    ----------
+    l  x y z w
+    0  1 1 1 -
+    1  - 1 - -
+    2  1 1 - -
+
+(iscondidate)
+    l|v 0 1 2 3
+    0   n y n n
+    1   y y y y
+    2   y y n y
+
+l0 shoud be v1 =>
+    x y z w    w - - -
+    1 1 1 - >> 0 1 1 1
+
+(w - - -)
+    with new knoladge
+    new comparasion (old no-s stays):
+    no new info, all w-s is "-"
+
+remove l0, v1, w
+    l|v 0 2 3
+    1   y y y
+    2   y n y
+    ---------
+    v  - - -
+    0  1 1 0
+    2  0 0 0
+    3  0 1 0
+    --------
+    l  x y z
+    1  - 1 -
+    2  1 1 -
+
+(iscondidate):
+    l|v 0 2 3
+    1   y n y
+    2   y n n
+
+l2 shoud be v0 =>
+    x y z    - - z
+    1 1 - >> 1 1 0
+
+(- - z)
+    with new knoladge
+    new comparasion (old no-s stays):
+    no new info, all z-s is "-"
+
+remove l2, v0, z
+    l|v 2 3
+    1   n y
+    -------
+    v  - -
+    2  0 0
+    3  0 1
+    ------
+    l  x y
+    1  - 1
+
+l1 shoud be v3 =>
+    x y    x -
+    - 1 >> 0 1
+
+(x -)
+    with new knoladge
+    new comparasion (old no-s stays):
+    no new info, all x-s is "-"
+
+remove l1, v3, x
+    l|v 2
+    -------
+    v  -
+    2  0
+    ------
+    l  y
+
+y is on the remaining place (y)
+
+ans: (w x y z)!
+"""
+
+"""
+values
+    v  - - -
+    0  1 1 1
+    2  0 0 0
+    3  0 1 0
+    --------
+    l  x y z
+    1  - 1 -
+    2  1 1 -
+
+(iscondidate):
+    l|v 0 2 3
+    1   y n y
+    2   y n n
+
+l2 shoud be v0 =>
+    x y z    - - -
+    1 1 - >> 1 1 1
+    (no new info about v-s)
+
+remove l2, v0
+    l|v 2 3
+    1   n y
+    --------
+    v  - - -
+    2  0 0 0
+    3  0 1 0
+    --------
+    l  x y z
+    1  - 1 -
+
+l1 shoud be v3 =>
+    x y z    - y -
+    - 1 - >> 0 1 0
+
+(- y -)
+    with new knoladge
+    new comparasion (old no-s stays):
+    v2 does not match
+
+...
+"""
+
+"""
+values
+    v  - - -
+    2  0 0 0
+    3  0 1 0
+    4  1 1 0
+    --------
+    l  x y z
+    1  - 1 -
+    4  0 - 0
+    5  1 1 -
+
+(iscondidate):
+    l|v 2 3 4
+    1   n y y
+    4   y y n
+    5   n n y
+
+l5 shoud be v4 =>
+    x y z    - - z
+    1 1 - >> 1 1 0
+
+remove l5, v4, z
+    l|v 2 3
+    1   n y
+    4   y y
+    -------
+    v  - -
+    2  0 0
+    3  0 1
+    ------
+    l  x y
+    1  - 1
+    4  0 -
+    5  1 1
+
+l1 shoud be v3 =>
+    x y z    - y -
+    - 1 - >> 0 1 0
+
+remove l1, v3
+    l|v 2 3
+    1   n y
+    --------
+    v  - - -
+    2  0 0 0
+    3  0 1 0
+    4  1 1 0
+    --------
+    l  x y z
+    1  - 1 -
+    4  0 - 0
+    5  1 1 -
+
+(- y -)
+    with new knoladge
+    new comparasion (old no-s stays):
+    v: 2 4  l: 4 5
+    y  0 1     - 1
+
+l4's y shoud be 0 =>
+    l  x y z
+    1  - 1 -
+    4  0 0 0
+    5  1 1 -
+
+...
+"""
+
 # 15
 def divisible(n, m):
     return n % m == 0
