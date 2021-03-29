@@ -9,6 +9,19 @@ def implication(a, b):
 
 
 FT = (False, True)
+FT = (0, 1)
+
+
+class AnyBoolCounterType:
+    def __eq__(self, other):
+        if other is AnyBool:
+            return True
+        # if other is self:
+        #     return True
+        return False
+
+
+AnyBoolCounter = AnyBoolCounterType()
 
 
 class AnyBoolType:
@@ -57,6 +70,8 @@ class AnyBoolType:
             return True
         if other is self:
             return True
+        if other is AnyBoolCounter:
+            return True
         # since AnyBoolType doesn't support integers,
         # 0 and 1 (False and True representations)
         # will be ignored
@@ -65,7 +80,15 @@ class AnyBoolType:
         return False
 
 
-AnyBool = AnyBoolType()
+
+class G:
+    def __repr__(self):
+        return "-"
+
+
+a = G()
+
+AnyBool = a  # AnyBoolType()
 
 
 def to_bool(value):
