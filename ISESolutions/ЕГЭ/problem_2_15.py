@@ -68,6 +68,10 @@ class AnyBoolType:
 AnyBool = AnyBoolType()
 
 
+def to_bool(value):
+    if value is AnyBool:
+        return value
+    return bool(value)
 
 
 def cast_values(values, function=to_bool):
