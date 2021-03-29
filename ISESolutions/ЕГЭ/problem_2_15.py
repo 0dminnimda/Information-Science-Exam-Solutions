@@ -406,6 +406,39 @@ l4's y shoud be 0 =>
 ...
 """
 
+
+def c(t):
+    tl = len(t)
+    max_len = len(str((AnyBool,)*tl))
+    for inputs in product(FT+(AnyBool,), repeat=tl):
+        # if not iscondidate(inputs, t):
+        #     continue
+
+        print(f"{inputs!s: <{max_len}}",
+              "-",
+              "yes" if iscondidate(inputs, t) else "no ",
+              "|",
+              inputs.count(0),
+              inputs.count(1),
+              inputs.count(AnyBoolCounter),
+              "|",
+              inputs.count(False),
+              inputs.count(True),
+              inputs.count(AnyBoolCounter))
+
+    # print()
+
+    # for inputs in product(FT+(AnyBool,), repeat=len(t)):
+    #     print(inputs, inputs.count(False),
+    #           inputs.count(True),
+    #           inputs.count(AnyBoolCounter))
+
+
+c([])
+c([0])
+c([0, 1])
+c([0, 1, 0])
+
 # 15
 def divisible(n, m):
     return n % m == 0
