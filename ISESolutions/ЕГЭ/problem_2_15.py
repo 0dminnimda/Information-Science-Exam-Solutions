@@ -149,20 +149,45 @@ def find(values, function, names):
     print("\n".join([str(i) for i in condidates]))
 
 
-def f(x, y, z, w):
-    return implication(x, y) and (x or not z) and (x != w)
+names = ("x", "y", "z", "w")[:2]
 
+
+def f_1(x, y, z, w):
+    return int(
+        implication(x, y) and (x or not z) and (x != w))
+
+
+def f_2(x, y, z, w):
+    return int(
+        ((y and not z) ** (x != y)) or (z and not w))
+
+def f_3(x, y):
+    return int(y ** x)
 
 ans = ("z", "y", "w", "x")
 
 
-find(
-    [
-        [[True, True, AnyBool, True], True],
-        [[AnyBool, True, AnyBool, AnyBool], True],
-        [[AnyBool, True, AnyBool, True], True]],
-    f, 4)
+vals = [
+    [[True, True, AnyBool, True], True],
+    [[AnyBool, True, AnyBool, AnyBool], True],
+    [[AnyBool, True, AnyBool, True], True]],
 
+vals = [
+    [[1, 1, a, 1], 1],
+    [[a, 1, a, a], 1],
+    [[a, 1, a, 1], 1]]
+
+vals = [
+    [[0, 0, a, 0], 0],
+    [[a, 0, a, 0], 0],
+    [[a, a, a, 0], 0]]
+#     w  z  -  y
+
+
+vals = [
+    [[0, 1], 0]]
+
+find(vals, f_3, names)
 
 # 15
 def divisible(n, m):
