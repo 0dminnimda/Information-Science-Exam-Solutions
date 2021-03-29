@@ -78,6 +78,16 @@ def validate(values1, values2):
                 return False
     return True
 
+def cast_values(values, function=to_bool):
+    values = list(values)
+
+    for i, (inputs, out) in enumerate(values):
+        inputs = (function(inp) for inp in inputs)
+        values[i] = tuple(inputs), function(out)
+
+    return tuple(values)
+
+
 
 def find(values, function, number_of_values):
     # TODO: does not work
