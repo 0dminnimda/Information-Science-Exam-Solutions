@@ -98,12 +98,15 @@ def measure_values(values):
     return inputs_len
 
 
+def find(values, function):
 
-def find(values, function, number_of_values):
     # TODO: does not work
     successes = []
 
-    for inputs in product(FT, repeat=number_of_values):
+    inputs_len = measure_values(values)
+    values = cast_values(values)
+
+    for inputs in product(FT, repeat=inputs_len):
         result = function(*inputs)
 
         for given_inputs, output in values:
