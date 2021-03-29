@@ -90,12 +90,15 @@ def cast_values(values, function=to_int):
     return tuple(values)
 
 
+DIFF_LEN = ValueError("different inputs lengths")
+
+
 def measure_values(values):
     inputs_len = len(values[0][0])
 
     for inputs, _ in values[1:]:
         if len(inputs) != inputs_len:
-            raise ValueError("different inputs lengths")
+            raise DIFF_LEN
 
     return inputs_len
 
