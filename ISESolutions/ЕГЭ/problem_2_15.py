@@ -112,6 +112,16 @@ def iscondidate(inps, given_inps):
 
 
 def find(values, function, names):
+    """
+    Args:
+        values (Iterable[Iterable[Union[Iterable[Any], Any]]):
+        [
+            [
+                [*inputs],
+                function_out
+            ],
+        ]
+    """
 
     # TODO: does not work
     condidates = set()
