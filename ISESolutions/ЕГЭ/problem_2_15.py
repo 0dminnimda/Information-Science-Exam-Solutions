@@ -5,7 +5,7 @@ from itertools import product
 
 
 def implication(a, b):
-    return not (a and not b)
+    return b ** a  # not (a and not b)
 
 
 FT = (False, True)
@@ -74,7 +74,13 @@ def to_bool(value):
     return bool(value)
 
 
-def cast_values(values, function=to_bool):
+def to_int(value):
+    if value is AnyBool:
+        return value
+    return int(value)
+
+
+def cast_values(values, function=to_int):
     values = list(values)
 
     for i, (inputs, out) in enumerate(values):
