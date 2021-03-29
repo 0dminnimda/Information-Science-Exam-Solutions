@@ -88,6 +88,16 @@ def cast_values(values, function=to_bool):
     return tuple(values)
 
 
+def measure_values(values):
+    inputs_len = len(values[0][0])
+
+    for inputs, _ in values[1:]:
+        if len(inputs) != inputs_len:
+            raise ValueError("different inputs lengths")
+
+    return inputs_len
+
+
 
 def find(values, function, number_of_values):
     # TODO: does not work
