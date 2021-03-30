@@ -207,9 +207,9 @@ vals = [
 vals = [
     [[0, 1], 0]]
 
-find(vals, f_3, names)
+# find(vals, f_3, names)
 
-breakpoint()
+# breakpoint()
 
 
 """
@@ -423,17 +423,49 @@ def divisible(n, m):
 
 
 def f2(a, x):
-    return implication(not divisible(x, a), implication(divisible(x, 10), not divisible(x, 12)))
+    return implication(
+        not divisible(x, a),
+        implication(divisible(x, 10),
+                    not divisible(x, 12)))
     # d_a = divisible(x, a)
-     #return not d_a and (divisible(x, 10) and divisible(x, 12))
+    # return not d_a and (divisible(x, 10) and divisible(x, 12))
 
 
-maximum = 50
+div = divisible
+implies = implication
+
+
+def f3(a, x):
+    return div(70, a) and (
+        implies(
+            div(x, 28),
+            implies(
+                not div(x, a),
+                not div(x, 21)
+            )
+        ) 
+    )
+
+
+func = f3
+
+
+maximum = 70*2
 
 # a = 36  # 6
 
-for a in range(maximum-1, 0, -1):
+suss = {}
+
+for a in range(1, maximum+1)[::-1]:
     for x in range(1, 10**5):
-        if not f2(a, x):
-            print(x, "not", a)
+        if func(a, x):
+            if not suss.get(a):
+                suss[a] = True
+                print(x, "yes", a)
+        else:
+            if suss.get(a):
+                print(x, "not", a)
+            suss[a] = False
+            del suss[a]
             break
+print(suss)
