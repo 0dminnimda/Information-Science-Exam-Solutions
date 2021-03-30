@@ -40,13 +40,41 @@ def r(n):
     return int("".join(strings), 2)
 
 
+
+def g(n):
+    n = to_base(n, 2)
+
+    el = n[1]
+    del n[-1]
+
+    n.append(el)
+    n.append(el)
+
+    strings = [str(i) for i in n]
+    return int("".join(strings), 2)
+
+
+c = 170
+c = 92
+
+
 # 5
-for i in range(1000):
-    assert g(i) == r(i)
-    if g(i) > 170:
-        print(i)
-        break
+# for i in range(2, 100):
+#     if g(i) > c:
+#         print(i)
+#         # break
+
 
 # 14
-res = to_base(81**15+3**22-27, 9)
-print(res.count(8))
+# num = 81**15+3**22-27
+# base = 9
+# res = to_base(num, base)
+# print(res.count(8))
+
+
+num = 343**5+7**3-1
+base = 7
+for x in range(500):
+    res = to_base(num - x, base)
+    if res.count(6) == 12:
+        print(x, res)
