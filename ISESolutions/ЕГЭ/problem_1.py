@@ -76,6 +76,34 @@ class Node:
         return False
 
 
+
+
+def BFS_list_as_queue(G, s):
+    """
+    Data: Graph G = (V, E), source node s
+    Result: For all nodes t reachable from s,
+        dist[t] is set to the length of the smallest path from s to t.
+        dist[t] is set to `None` for nodes not reachable from s.
+    """
+
+    dist = {}
+    for v in G.nodes:
+        dist[v] = None
+    dist[s] = 0
+
+    Q = []
+    Q.append(s)
+
+    while len(Q):
+        u = Q.pop(0)
+        for v in u.neigbors:
+            if dist[v] is None:
+                Q.append(v)
+                dist[v] = dist[u] + 1
+
+    return dist
+
+
 named_nodes = [Node(chr(i)) for i in range(ord("а"), ord("ж")+1)]
 nodes = [Node(str(i)) for i in range(len(named_nodes))]
 
