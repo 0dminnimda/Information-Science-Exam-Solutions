@@ -104,6 +104,35 @@ def BFS_list_as_queue(G, s):
     return dist
 
 
+def BFS_builtin_queue(G, s):
+    """
+    Data: Graph G = (V, E), source node s
+    Result: For all nodes t reachable from s,
+        dist[t] is set to the length of the smallest path from s to t.
+        dist[t] is set to `None` for nodes not reachable from s.
+    """
+
+    # tmp
+    from queue import SimpleQueue
+
+    dist = {}
+    for v in G.nodes:
+        dist[v] = None
+    dist[s] = 0
+
+    Q = SimpleQueue()
+    Q.put(s)
+
+    while Q.qsize() > 0:
+        u = Q.get(timeout=0)  # timeout is optional
+        for v in u.neigbors:
+            if dist[v] is None:
+                Q.put(v)
+                dist[v] = dist[u] + 1
+
+    return dist
+
+
 named_nodes = [Node(chr(i)) for i in range(ord("а"), ord("ж")+1)]
 nodes = [Node(str(i)) for i in range(len(named_nodes))]
 
