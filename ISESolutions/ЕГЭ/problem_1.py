@@ -15,6 +15,8 @@ __all__ = (
 # 1) comparison of names from the figure and the table
 # 2) finding a certain length with some conditions
 
+# 1 - problem of determining the bijective mapping
+# between the vertices of two undirected isomorphic graphs
 
 class Node2:
     def __init__(self, name: str) -> None:
