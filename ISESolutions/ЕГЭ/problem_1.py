@@ -89,6 +89,10 @@ class Graph:
 
         return self
 
+    @property
+    def nodes(self):
+        return self.adj.keys()
+
 
 
 def BFS_list_as_queue(G, s):
