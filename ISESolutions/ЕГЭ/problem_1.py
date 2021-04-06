@@ -81,6 +81,14 @@ class Graph:
         def df(): return defaultdict(dict)
         self.adj = defaultdict(df)
 
+    def add_edge(self, start, end,
+                 directed=False, **props) -> Graph:
+        self.adj[start][end].update(props)
+        if not directed:
+            self.adj[end][start].update(props)
+
+        return self
+
 
 
 def BFS_list_as_queue(G, s):
