@@ -116,6 +116,15 @@ class Graph:
     def exist_node(self, node):
         return node in self.adj
 
+    def exist_undirected_edge(self, start, end):
+        # start exist and end exist
+        # and start is neighbor of end
+        # and end is neighbor of start
+        return (self.exist_node(start)
+                and self.exist_node(end)
+                and end in self.adj[start]
+                and start in self.adj[end])
+
 
 
 def BFS_list_as_queue(G, s):
