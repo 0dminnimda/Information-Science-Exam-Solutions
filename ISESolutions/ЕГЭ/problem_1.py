@@ -96,6 +96,23 @@ class Graph:
     def neighbors(self, node):
         return self.adj[node].keys()
 
+    # extention
+
+    def adjacency_list_str(self, one_edge_on_line=False):
+        lines = []
+        for n in self.adj:
+            if one_edge_on_line:
+                for u in self.neighbors(n):
+                    lines.append(
+                        f"{n} {u}"
+                    )
+            else:
+                lines.append(
+                    f"{n} {tuple(self.neighbors(n))}"
+                    # + str(list(self.neighbors(n)))[1:-1]
+                )
+        return "\n".join(lines)
+
 
 
 def BFS_list_as_queue(G, s):
