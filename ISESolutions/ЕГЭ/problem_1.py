@@ -156,7 +156,7 @@ def BFS_list_as_queue(G, s):
 
     while len(Q):
         u = Q.pop(0)
-        for v in u.neigbors:
+        for v in G.neighbors(u):
             if dist[v] is None:
                 Q.append(v)
                 dist[v] = dist[u] + 1
