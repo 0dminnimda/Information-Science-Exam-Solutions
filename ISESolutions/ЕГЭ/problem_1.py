@@ -125,6 +125,10 @@ class Graph:
                 and end in self.adj[start]
                 and start in self.adj[end])
 
+    def exist_directed_edge(self, start, end):
+        # start exist and end is neighbor of start
+        return (self.exist_node(start)
+                and end in self.adj[start])
 
 
 def BFS_list_as_queue(G, s):
