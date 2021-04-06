@@ -193,6 +193,23 @@ def BFS_builtin_queue(G, s):
     return dist
 
 
+
+def to_auxiliary_digraph(G, node):
+    H = Graph()
+    dist = BFS_builtin_queue(G, node)
+
+    for n in G.nodes:
+        n_dist = dist[n]
+        for u in G.neighbors(n):
+            u_dist = dist[u]
+            if n_dist == u_dist:
+                H.add_edge(n, u)
+            elif n_dist < u_dist:
+                H.add_edge(n, u, directed=True)
+
+    return H
+
+
 named_nodes = [Node(chr(i)) for i in range(ord("а"), ord("ж")+1)]
 nodes = [Node(str(i)) for i in range(len(named_nodes))]
 
