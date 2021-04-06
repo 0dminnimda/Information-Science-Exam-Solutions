@@ -116,6 +116,13 @@ class Graph:
     def exist_node(self, node):
         return node in self.adj
 
+    def exist_edge(self, start, end,
+                   directed=False):
+        if directed:
+            return self.exist_directed_edge(start, end)
+
+        return self.exist_undirected_edge(start, end)
+
     def exist_undirected_edge(self, start, end):
         # start exist and end exist
         # and start is neighbor of end
