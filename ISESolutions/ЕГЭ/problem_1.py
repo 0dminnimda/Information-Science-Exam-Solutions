@@ -93,6 +93,9 @@ class Graph:
     def nodes(self):
         return self.adj.keys()
 
+    def neighbors(self, node):
+        return self.adj[node].keys()
+
 
 
 def BFS_list_as_queue(G, s):
