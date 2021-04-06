@@ -185,7 +185,7 @@ def BFS_builtin_queue(G, s):
 
     while Q.qsize() > 0:
         u = Q.get(timeout=0)  # timeout is optional
-        for v in u.neigbors:
+        for v in G.neighbors(u):
             if dist[v] is None:
                 Q.put(v)
                 dist[v] = dist[u] + 1
