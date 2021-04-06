@@ -76,6 +76,11 @@ class Node:
         return False
 
 
+class Graph:
+    def __init__(self):
+        def df(): return defaultdict(dict)
+        self.adj = defaultdict(df)
+
 
 
 def BFS_list_as_queue(G, s):
