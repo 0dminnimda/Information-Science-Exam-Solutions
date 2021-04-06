@@ -113,6 +113,9 @@ class Graph:
                 )
         return "\n".join(lines)
 
+    def exist_node(self, node):
+        return node in self.adj
+
 
 
 def BFS_list_as_queue(G, s):
