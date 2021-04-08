@@ -210,6 +210,66 @@ def to_auxiliary_digraph(G, node):
     return H
 
 
+
+'''
+# def positionally_equivalent(v_characts, u_characts):
+#     """
+#     Compare the vertex characteristics in the neighborhood
+#     of the vertices v and u of the same level
+#     """
+#     pass
+
+
+def bijective_mapping(G, H):
+    """
+    Input:
+        graphs G = (V_G, E_G), H = (V_H , E_H) ∈ L_n,
+        isomorphism of which it is necessary to determine if it exists.
+        We assume that these graphs have the same number of vertices and edges,
+        as well as their vectors of local degrees DG and DH are equal.
+    Output:
+        the determining the one-to-one correspondence P
+        between the vertex sets of VG and VH , if it exists.
+    """
+
+    Q = G
+    S = H
+    P = set()
+
+    for v in Q.nodes:
+        ADQ_v = to_auxiliary_digraph(Q, v)
+        v_characts = node_characteristics(ADQ_v)
+        v_counter = count_on_levels(v_characts)
+        for u in S.nodes:
+            ADS_u = to_auxiliary_digraph(S, u)
+            u_characts = node_characteristics(ADS_u)
+            u_counter = count_on_levels(u_characts)
+
+            if positionally_equivalent(v_counter, u_counter):
+                unique_v = find_unique_nodes(v_counter)
+                unique_u = find_unique_nodes(u_counter)
+
+                # seems len(unique_v) == len(unique_u)
+                P.add(zip(unique_v, unique_u))
+
+                for unique in unique_v:
+                    Q.nodes.remove(unique)
+
+                for unique in unique_u:
+                    S.nodes.remove(unique)
+
+            else:  # seems redundant
+                if len(ADQ_v.nodes) != len(ADS_u.nodes):
+                    raise ValueException(  # TODO
+                        "graphs are not isomorphic")
+
+     If N 6= 0, put i := i, j := 1 and go to Step 2. Otherwise, stop the
+    computations, because the bijective mapping between the nodes in
+    isomorphic graphs G and H has constructed, the pairs of the respective
+    nodes are stored in the set P
+'''
+
+
 named_nodes = [Node(chr(i)) for i in range(ord("а"), ord("ж")+1)]
 nodes = [Node(str(i)) for i in range(len(named_nodes))]
 
