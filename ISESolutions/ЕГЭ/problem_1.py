@@ -212,6 +212,42 @@ def to_auxiliary_digraph(G, node):
 
 
 '''
+PROCEDURE Match(s)
+   INPUT: an intermediate state s; the initial state s_o has M(s_o)=Ø
+   OUTPUT: the mappings between the two graphs
+
+   IF M(s) covers all the nodes of G_2 THEN
+    OUTPUT M(s)
+   ELSE
+    Compute the set P(s) of the pairs candidate for inclusion in M(s)
+    FOREACH p in P(s)
+      IF the feasibility rules succeed for the inclusion of p in M(s) THEN
+       Compute the state s` obtained by adding p to M(s)
+       CALL Match(s')
+      END IF
+    END FOREACH
+    Restore data structures
+   END IF
+END PROCEDURE Match
+
+def match(s)
+    """
+    INPUT: an intermediate state s; the initial state s_o has M(s_o)=Ø
+    OUTPUT: the mappings between the two graphs
+    """
+
+    if M(s) covers all the nodes of G_2:
+        return M(s)
+    else:
+        Compute the set P(s) of the pairs candidate for inclusion in M(s)
+        for p in P(s):
+            if the feasibility rules succeed for the inclusion of p in M(s):
+                Compute the state s` obtained by adding p to M(s)
+                return match(s')
+        # restore data structures
+'''
+
+'''
 # def positionally_equivalent(v_characts, u_characts):
 #     """
 #     Compare the vertex characteristics in the neighborhood
