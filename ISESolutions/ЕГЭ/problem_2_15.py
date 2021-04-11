@@ -4,7 +4,7 @@
 from itertools import product
 
 
-def implication(a, b):
+def implies(a, b):
     return b ** a  # not (a and not b)
 
 
@@ -66,6 +66,8 @@ class AnyBoolType:
         # AnyBoolType only represents True and False
         return False
 
+    def __hash__(self):
+        return -1
 
 
 class G:
@@ -133,7 +135,6 @@ def find(values, function, names):
         ]
     """
 
-    # TODO: does not work
     condidates = set()
 
     inputs_len = measure_values(values)
@@ -143,7 +144,7 @@ def find(values, function, names):
         raise DIFF_LEN
     names = tuple(names)
 
-    print(names)
+    print("  " + "  ".join(names))
 
     for inputs in product(FT, repeat=inputs_len):
         result = function(*inputs)
@@ -169,47 +170,58 @@ def find(values, function, names):
     print("\n".join([str(i) for i in condidates]))
 
 
-names = ("x", "y", "z", "w")[:2]
+names = ("x", "y", "z", "w")  # [:2]
 
 
 def f_1(x, y, z, w):
     return int(
-        implication(x, y) and (x or not z) and (x != w))
+        implies(x, y) and (x or not z) and (x != w))
 
 
 def f_2(x, y, z, w):
     return int(
         ((y and not z) ** (x != y)) or (z and not w))
 
+
 def f_3(x, y):
     return int(y ** x)
+
 
 ans = ("z", "y", "w", "x")
 
 
-vals = [
+def f_4(x, y, z, w):
+    return (x and not y) or implies(not (z == w), (w and not x))
+
+
+vals_1 = [
     [[True, True, AnyBool, True], True],
     [[AnyBool, True, AnyBool, AnyBool], True],
     [[AnyBool, True, AnyBool, True], True]],
 
-vals = [
+vals_1 = [
     [[1, 1, a, 1], 1],
     [[a, 1, a, a], 1],
     [[a, 1, a, 1], 1]]
 
-vals = [
+vals_2 = [
     [[0, 0, a, 0], 0],
     [[a, 0, a, 0], 0],
     [[a, a, a, 0], 0]]
 #     w  z  -  y
 
-
-vals = [
+vals_3 = [
     [[0, 1], 0]]
 
-# find(vals, f_3, names)
+vals_4 = [
+    [[0, a, 0, 0], 0],
+    [[0, a, a, 0], 0],
+    [[0, a, a, a], 0]]
+#     w  z  y  x
 
-# breakpoint()
+find(vals_4, f_4, names)
+
+breakpoint()
 
 
 """
@@ -423,16 +435,15 @@ def divisible(n, m):
 
 
 def f2(a, x):
-    return implication(
+    return implies(
         not divisible(x, a),
-        implication(divisible(x, 10),
-                    not divisible(x, 12)))
+        implies(divisible(x, 10),
+                not divisible(x, 12)))
     # d_a = divisible(x, a)
     # return not d_a and (divisible(x, 10) and divisible(x, 12))
 
 
 div = divisible
-implies = implication
 
 
 def f3(a, x):
@@ -443,7 +454,7 @@ def f3(a, x):
                 not div(x, a),
                 not div(x, 21)
             )
-        ) 
+        )
     )
 
 
