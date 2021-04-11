@@ -54,15 +54,18 @@ def g(n):
     return int("".join(strings), 2)
 
 
+
+
 c = 170
 c = 92
+c = 76
 
 
 # 5
 # for i in range(2, 100):
 #     if g(i) > c:
 #         print(i)
-#         # break
+#         break
 
 
 # 14
@@ -72,9 +75,16 @@ c = 92
 # print(res.count(8))
 
 
-num = 343**5+7**3-1
-base = 7
-for x in range(500):
-    res = to_base(num - x, base)
-    if res.count(6) == 12:
-        print(x, res)
+# num = 343**5+7**3-1
+# base = 7
+# for x in range(500):
+#     res = to_base(num - x, base)
+#     if res.count(6) == 12:
+#         print(x, res)
+
+# num = 216**5+6**3-1
+# base = 6
+# for x in range(500):
+#     res = to_base(num - x, base)
+#     if res.count(5) == 12:
+#         print(x, res)
