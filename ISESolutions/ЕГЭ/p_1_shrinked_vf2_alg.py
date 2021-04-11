@@ -121,3 +121,8 @@ class GMState:
             for node in list(vector.keys()):
                 if vector[node] == self.depth:
                     del vector[node]
+
+G1 = nx.path_graph(4)
+G2 = nx.path_graph("3210")
+GM = GraphMatcher(G1, G2)
+print(next(GM.match()))
