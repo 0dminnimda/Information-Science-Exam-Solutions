@@ -16,10 +16,12 @@ def f(x):
         x //= 8
     return m, s
 
+
 out = 40
 out = 5, 12
+out = 4, 10
 
 for i in range(500):
     if f(i) == out:
         print(i)
-         #break
+        # break
