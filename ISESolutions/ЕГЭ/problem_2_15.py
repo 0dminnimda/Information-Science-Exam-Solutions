@@ -219,9 +219,9 @@ vals_4 = [
     [[0, a, a, a], 0]]
 #     w  z  y  x
 
-find(vals_4, f_4, names)
+# find(vals_4, f_4, names)
 
-breakpoint()
+pass
 
 
 """
@@ -430,20 +430,17 @@ l4's y shoud be 0 =>
 
 
 # № 15
-def divisible(n, m):
+def div(n, m):
     return n % m == 0
 
 
 def f2(a, x):
     return implies(
-        not divisible(x, a),
-        implies(divisible(x, 10),
-                not divisible(x, 12)))
-    # d_a = divisible(x, a)
-    # return not d_a and (divisible(x, 10) and divisible(x, 12))
-
-
-div = divisible
+        not div(x, a),
+        implies(div(x, 10),
+                not div(x, 12)))
+    # d_a = div(x, a)
+    # return not d_a and (div(x, 10) and div(x, 12))
 
 
 def f3(a, x):
@@ -458,25 +455,23 @@ def f3(a, x):
     )
 
 
-func = f3
+def f4(a, x):
+    return div(120, a) and implies(
+        div(x, 36), implies(not div(x, a), not div(x, 45)))
 
 
-maximum = 70*2
+func = f4
 
-# a = 36  # 6
+maximum = 120
 
-suss = {}
+suss = set()
 
 for a in range(1, maximum+1)[::-1]:
-    for x in range(1, 10**5):
+    for x in range(1, 10**4):
         if func(a, x):
-            if not suss.get(a):
-                suss[a] = True
-                print(x, "yes", a)
+            suss.add(a)
         else:
-            if suss.get(a):
-                print(x, "not", a)
-            suss[a] = False
-            del suss[a]
+            print(x)
+            suss.discard(a)
             break
-print(suss)
+print(sorted(suss))
