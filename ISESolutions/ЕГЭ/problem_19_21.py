@@ -31,14 +31,16 @@ def next_step(x, c, lvl=0):
     indent = lvl*4*" "
 
     if sum(x) >= MAX:
-        if c == 2:
-            return True
-        if c > 2:
-            # print(indent, x, True)
-            return True
-        if c % 2 == 0:
-            return True
-        return False
+        print(indent, x, c % 2 == 0)
+        return c % 2 == 0
+            # if c == 2:
+            #     return True
+            # if c > 2:
+            #     # print(indent, x, True)
+            #     return True
+            # if c % 2 == 0:
+            #     return True
+            # return False
 
     print(indent, sum(x), x, c)
     return all(next_step(i, c+1, lvl+1)
