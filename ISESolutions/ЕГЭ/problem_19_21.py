@@ -1,39 +1,3 @@
-
-
-# def next_person(p):
-#     return 0 if p else 1
-
-
-# def make_step():
-#     while 1:
-#         x = yield
-#         yield [x[0] + 1, ]
-
-# def s(*ls):
-#     for i in zip(*ls):
-#         yield sum(*i)
-
-
-# funcs = (
-#     lambda x: x[0] += 1,
-#     lambda x: x[0] *= 3,
-#     lambda x: x[0] += 1,
-#     lambda x: x[0] += 1,
-# )
-
-
-# def next_step(x, c, lvl=0):
-#     print(next_step([x[0] + 1, x[1]], p, c, lvl=lvl),
-#     next_step([x[0] * 3, x[1]], p, c, lvl=lvl),
-#     next_step([x[0], x[1] + 1], p, c, lvl=lvl),
-#     next_step([x[0], x[1] * 3], p, c, lvl=lvl))
-
-#     return {
-#         **next_step(x[0] + 1, p),
-#         **next_step(x[0] * 3, p),
-#         **next_step(x[1] + 1, p),
-#         **next_step(x[1] * 3, p)}
-
 ###################################################
 # 19
 
