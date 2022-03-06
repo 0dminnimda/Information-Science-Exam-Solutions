@@ -22,6 +22,7 @@ __pycache__/
 
 # C extensions
 *.so
+*.o
 
 # Distribution / packaging
 .pypirc
@@ -193,3 +194,5 @@ cython_debug/
 # .ini-files
 config.ini
 
+# Executable files
+*.exe
