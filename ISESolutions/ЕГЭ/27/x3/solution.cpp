@@ -25,23 +25,22 @@ int main(int argc, char * argv[])
     vector<M> nums_odd_even;
     vector<M> nums_odd_odd;
 
+    fstream file;
+    file.open("inf_26_04_21_27a.txt", ios_base::in);
+
+    int n;
+    file >> n;
+
+    cout << "n: " << n << "\n";
+
+    numt a, b;
+    while (file >> a >> b)
     {
-        fstream file;
-        file.open("..\\inf_26_04_21_27a.txt", ios_base::in);
+        if(b % 2 != 1)
+            continue;
 
-        int n;
-        file >> n;
-
-        cout << "n: " << n << "\n";
-
-        numt a, b;
-        while (file >> a >> b)
-        {
-            if(b % 2 != 1)
-                continue;
-
-            if(a < b)
-                swap(a, b);
+        if(a < b)
+            swap(a, b);
 //            {
 //                numt t;
 //                t = a;
@@ -49,43 +48,42 @@ int main(int argc, char * argv[])
 //                b = t;
 //            }
 
-            bool mx_even = a % 2 == 0;
-            bool mn_even = b % 2 == 0;
+        bool mx_even = a % 2 == 0;
+        bool mn_even = b % 2 == 0;
 
-            if (mx_even & mn_even)
-                // cannot happen because at least one is odd
-                return -1;
-            else if (mx_even & !mn_even)
-                nums_even_odd.push_back({!mx_even, !mn_even, a + b});
-            else if (!mx_even & mn_even)
-                nums_odd_even.push_back({!mx_even, !mn_even, a + b});
-            else if (!mx_even & !mn_even)
-                nums_odd_odd.push_back({!mx_even, !mn_even, a + b});
-        }
-        file.close();
-
-    //    vector<M> nums;
-
-    //    for(decltype(nums)::const_iterator m = nums.begin(); m != nums.end(); ++m)
-    //    {
-    //        cout << (*m).a << " " << (*m).b << "\n";
-    //    }
-
-    //    for(M m: nums)
-    //    {
-    //        cout << m.a << " " << m.b << "\n";
-    //    }
-
-    //    M m;
-    //    for(int i = 0; i < nums.size(); i++)
-    //    {
-    //        m = nums[i];
-    //        cout << m.a << " " << m.b << "\n";
-    //    }
-    //
-    //    numt sum_of_max = 0;
-    //    numt sum_of_min = 0;
+        if (mx_even & mn_even)
+            // cannot happen because at least one is odd
+            return -1;
+        else if (mx_even & !mn_even)
+            nums_even_odd.push_back({!mx_even, !mn_even, a + b});
+        else if (!mx_even & mn_even)
+            nums_odd_even.push_back({!mx_even, !mn_even, a + b});
+        else if (!mx_even & !mn_even)
+            nums_odd_odd.push_back({!mx_even, !mn_even, a + b});
     }
+    file.close();
+
+//    vector<M> nums;
+
+//    for(decltype(nums)::const_iterator m = nums.begin(); m != nums.end(); ++m)
+//    {
+//        cout << (*m).a << " " << (*m).b << "\n";
+//    }
+
+//    for(M m: nums)
+//    {
+//        cout << m.a << " " << m.b << "\n";
+//    }
+
+//    M m;
+//    for(int i = 0; i < nums.size(); i++)
+//    {
+//        m = nums[i];
+//        cout << m.a << " " << m.b << "\n";
+//    }
+//
+//    numt sum_of_max = 0;
+//    numt sum_of_min = 0;
 
     M m;
     int diff;
