@@ -21,7 +21,7 @@ int main()
     t n;
     file >> n;
 
-    t elem = 10000000000;
+    t elem = 1000000000;
     t a, b;
     t step = 0;
     while (file >> a >> b)
