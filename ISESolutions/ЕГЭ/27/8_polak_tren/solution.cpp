@@ -46,8 +46,8 @@ int main()
 
         t v = nums[distance(nums.begin(), min_element(start, finish))];
         mn = min(mn, n*n + v*v);
-
 #endif
+
     }
 
     cout << mn << "\n";
