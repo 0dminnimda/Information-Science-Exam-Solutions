@@ -2,9 +2,38 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <thread>
+#include <memory>
 using namespace std;
 
 typedef unsigned long long t;
+
+
+void proc(vector<t> &nums, vector<t> &mxnums, int num)
+{
+    t n;
+    t mx = 0;
+    //    #pragma omp parallel for
+    for (auto i = mxnums.size() / num; i < mxnums.size() / (num+1); i++)
+    {
+        cout << i << "\n";
+//        #pragma omp parallel for
+        for (auto j = i + 1; j<nums.size(); j++)
+        {
+            n = nums[i] * nums[j];
+            if (n % 14 == 0)
+            {
+                mx = max(mx, n);
+//                n = max(mx, n);
+
+//                #pragma omp critical
+//                mx = n;
+//                mxnums[i] = max(n, mxnums[i]);
+            }
+        }
+    }
+    mxnums[num] = mx;
+}
 
 // https://inf-ege.sdamgia.ru/problem?id=27891
 int main()
@@ -32,9 +61,22 @@ int main()
     cout << "starting\n";
 
     vector<t> mxnums;
-    mxnums.resize(len, 0);
+    mxnums.resize(thread::hardware_concurrency(), 0);
+
+
+    vector<thread> threads;
+    for (int i = 0; i < mxnums.size(); i++)
+    {
+        threads.push_back(move(thread(proc, mxnums, i)));
+    }
+
 
     t mx = 0;
+    for (thread thrd: threads)
+    {
+        thrd.join();
+    }
+
 
 //    for_each(execution::par, nums.begin(), nums.end(),
 //             [](auto&& item)
@@ -42,24 +84,7 @@ int main()
 //                 cout << item << "\n";
 //             });
 
-//    #pragma omp parallel for
-    for (auto i = 0; i<nums.size(); i++)
-    {
-        cout << i << "\n";
-//        #pragma omp parallel for
-        for (auto j = i + 1; j<nums.size(); j++)
-        {
-            n = nums[i] * nums[j];
-            if (n % 14 == 0)
-            {
-//                n = max(mx, n);
 
-//                #pragma omp critical
-//                mx = n;
-                mxnums[i] = max(n, mxnums[i]);
-            }
-        }
-    }
 
     cout << "size: " << mxnums.size() << "\n";
     cout << *max_element(mxnums.begin(), mxnums.end()) << "\n";
